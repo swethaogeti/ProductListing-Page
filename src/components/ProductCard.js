@@ -1,20 +1,23 @@
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   const {
     brand,
     discount,
-    discountPrice,
+    discountedPrice,
     id,
     img,
     name,
     originalPrice,
     rating,
+    sizes,
   } = product;
 
   return (
-    <div className="w-[16rem] max-h-fit m-2 text-left cursor-pointer  p-2">
+    <div
+      className="w-[18rem] max-h-fit m-2 text-left cursor-pointer  p-1"
+      key={id}
+    >
       <img src={img}></img>
 
       <h2 className="text-[1.3rem] font-medium text-gray-500">{brand}</h2>
@@ -23,17 +26,16 @@ const ProductCard = ({ product }) => {
         {rating}⭐
       </div>
       <div className="flex space-x-2">
-        <b>₹ {originalPrice} </b>
-        <span className="text-gray-500 line-through">₹{discountPrice} </span>
+        <b>₹ {discountedPrice} </b>
+        <span className="text-gray-600 line-through">{originalPrice}</span>
         <b className="text-purple-600">{discount}% off</b>
       </div>
       <div className="flex space-x-2">
         <p className="text-gray-500 text-[1rem] font-[500]">Size</p>
         <div className="flex space-x-2">
-          <span className="text-black">S</span>
-          <span>M</span>
-          <span>L</span>
-          <span>XL</span>
+          {sizes.map((i) => (
+            <p>{i}</p>
+          ))}
         </div>
       </div>
     </div>

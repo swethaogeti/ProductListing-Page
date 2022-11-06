@@ -2,15 +2,22 @@ import React from "react";
 import Filters from "../components/Filters";
 import ProductCard from "../components/ProductCard";
 import data from "../../src/data/data.json";
+import { getIdealForProducts, getSortedProducts } from "../actions";
+import { useFiltersContext } from "../contexts/FilterContext";
+
 const ProductListingPage = () => {
   const { products } = data;
-  console.log(products);
+  const { filters } = useFiltersContext();
+  const ans = getIdealForProducts(products, filters.idealFor);
+
+  const finalProducts = getSortedProducts(ans, filters.sortBy);
+
   return (
-    <div className=" max-w-7xl   mx-auto p-4 flex ">
+    <div className="w-full   mx-auto p-4 flex ">
       <Filters />
 
       <div className=" flex flex-wrap  ">
-        {products.map((product) => {
+        {finalProducts.map((product) => {
           return <ProductCard key={product.id} product={product} />;
         })}
       </div>
